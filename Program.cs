@@ -36,6 +36,7 @@ public class Program
                     case "6": DisplayExpeditionList(); break;
                     case "7": DisplayStats();          break;
                     case "8": DisplayTopClients();     break;
+                    case "9": DisplayRecoveryPlan();   break;
                     case "0":
                     case "q":
                     case "Q":
@@ -77,6 +78,7 @@ public class Program
         Console.WriteLine("│ 6. File d'expédition (à envoyer)      │");
         Console.WriteLine("│ 7. Statistiques financières           │");
         Console.WriteLine("│ 8. Top clients & entreprises          │");
+        Console.WriteLine("│ 9. Plan de relances priorisé          │");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
     }
@@ -228,5 +230,30 @@ public class Program
         {
             Console.WriteLine($"  {entr,-30} {nb,8} {total,10:N0} €");
         }
+    }
+
+    private static void DisplayRecoveryPlan()
+    {
+        DisplayConsole.DisplayTitle("Plan de relances — trié par priorité décroissante");
+        var plan = _service.GenerateRecoveryPlan().ToList();
+
+        // Regroupement par niveau pour un affichage hiérarchisé
+        foreach (var group in plan.GroupBy(p => p.Level).OrderBy(g => g.Key))
+        {
+            Console.WriteLine();
+            Console.WriteLine($"—— {group.Key.ToString().ToUpper()} —— ({group.Count()} commandes, {group.Sum(p => p.Order.Amount):N0} €)");
+
+            foreach (var p in group)
+            {
+                var c = p.Order;
+                var indicCli = p.NbOtherClientOrders > 0
+                    ? $" {p.NbOtherClientOrders + 1} commandes non payées"
+                    : "";
+                Console.WriteLine($"  N°{c.Number,-4} {c.FullName,-25} {c.Amount,6:N0} €  {p.Action}{indicCli}");
+            }
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"Total à recouvrer : {plan.Sum(p => p.Order.Amount):N0} €");
     }
 }

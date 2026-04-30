@@ -17,6 +17,21 @@ public class OrderService
         _typesByEnterprise = typesByEnterprise;
         _expeditionValues = expeditionValues;
     }
+
+    public enum AlertLevel
+    {
+        Critique,    // envoyée non payée + gros montant
+        Importante,  // envoyée non payée
+        Standard,    // non payée non envoyée, gros montant
+        Surveillance // non payée non envoyée, petit montant
+    }
+
+    public record RecoveryPlan(
+        Order Order,
+        AlertLevel Level,
+        int Score,
+        string Action,
+        int NbOtherClientOrders);
         
     // -----------------------------------------------------------------
     // Lecture / recherche
@@ -131,4 +146,50 @@ public class OrderService
             .Select(g => (Entreprise: g.Key, NumberOrders: g.Count(), Total: g.Sum(c => c.Amount)))
             .OrderByDescending(x => x.NumberOrders)
             .Take(n);
+
+
+    // -----------------------------------------------------------------
+    // Actions
+    // -----------------------------------------------------------------
+
+    public IEnumerable<RecoveryPlan> GenerateRecoveryPlan()
+    {
+        // Compte les commandes non payées par client (pour détecter les clients récurrents)
+        var ordersByClient = _orders
+            .Where(c => !c.Paid)
+            .GroupBy(c => c.FullName)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        return _orders
+            .Where(c => !c.Paid)
+            .Select(c =>
+            {
+                var nbOthers = ordersByClient[c.FullName] - 1;
+
+                // Calcul du score : montant + bonus risque + bonus client récurrent
+                int score = (int)c.Amount;
+                if (c.Sent) score += 500;            // gros bonus si déjà envoyée
+                if (nbOthers > 0) score += 100 * nbOthers; // bonus client récurrent
+
+                AlertLevel level = (c.Sent, c.Amount) switch
+                {
+                    (true, >= 400)  => AlertLevel.Critique,
+                    (true, _)       => AlertLevel.Importante,
+                    (false, >= 400) => AlertLevel.Standard,
+                    _               => AlertLevel.Surveillance
+                };
+
+                string action = level switch
+                {
+                    AlertLevel.Critique     => " Appel direct sous 24h — marchandise livrée non réglée",
+                    AlertLevel.Importante   => " Relance recommandée + mise en demeure si pas de retour",
+                    AlertLevel.Standard     => " Relance email avant expédition",
+                    AlertLevel.Surveillance => " Surveiller, relancer à J+30",
+                    _                       => ""
+                };
+
+                return new RecoveryPlan(c, level, score, action, nbOthers);
+            })
+            .OrderByDescending(p => p.Score);
+    }
 }
