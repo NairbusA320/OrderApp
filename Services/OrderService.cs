@@ -51,6 +51,12 @@ public class OrderService
     public IEnumerable<Order> UnsentOrders() =>
         _orders.Where(c => !c.Sent);
 
+    /// <summary>
+    /// Commandes à risque : envoyées mais pas payées.
+    /// </summary>
+    public IEnumerable<Order> OrdersAtRisk() =>
+        _orders.Where(c => c.Sent && !c.Paid);
+
     // -----------------------------------------------------------------
     // Helpers
     // -----------------------------------------------------------------
@@ -63,4 +69,16 @@ public class OrderService
         return type;
     }
 
+    // -----------------------------------------------------------------
+    // Statistiques
+    // -----------------------------------------------------------------
+
+    public decimal TotalIncome() =>
+        _orders.Where(c => c.Paid).Sum(c => c.Amount);
+
+    public decimal PendingToRecover() =>
+        _orders.Where(c => !c.Paid).Sum(c => c.Amount);
+
+    public decimal TotalAmountAtRisk() =>
+        OrdersAtRisk().Sum(c => c.Amount);
 }

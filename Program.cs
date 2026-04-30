@@ -31,6 +31,7 @@ public class Program
                     case "1": ListAll();               break;
                     case "2": SearchOrder();           break;
                     case "3": FilterByStatus();        break;
+                    case "4": DisplayDashboard();      break;
                     case "0":
                     case "q":
                     case "Q":
@@ -67,6 +68,7 @@ public class Program
         Console.WriteLine("│ 1. Lister toutes les commandes        │");
         Console.WriteLine("│ 2. Rechercher une commande            │");
         Console.WriteLine("│ 3. Filtrer par statut (payé / envoyé) |");
+        Console.WriteLine("│ 4. Tableau de bord (4 cadrans)        │");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
     }
@@ -145,5 +147,26 @@ public class Program
 
         DisplayConsole.DisplayOrdersArray(
             resultats.OrderBy(c => c.Number), _service);
+    }
+
+    private static void DisplayDashboard()
+    {
+        DisplayConsole.DisplayTitle("Tableau de bord");
+
+        var toutes = _service.AllOrders();
+        var aTraiter = toutes.Count(c => !c.Paid && !c.Sent);
+        var aExpedier = toutes.Count(c => c.Paid && !c.Sent);
+        var aRisque = toutes.Count(c => !c.Paid && c.Sent);
+        var cloturees = toutes.Count(c => c.Paid && c.Sent);
+
+        Console.WriteLine();
+        Console.WriteLine("                  Non envoyée        Envoyée");
+        Console.WriteLine($"  Non payée   │   À traiter : {aTraiter,3} │  À RISQUE: {aRisque,3}  │");
+        Console.WriteLine($"  Payée       │   À expédier: {aExpedier,3} │  Clôturée: {cloturees,3}  │");
+        Console.WriteLine();
+        Console.WriteLine($"  Total : {toutes.Count} commandes");
+        Console.WriteLine($"  CA encaissé          : {_service.TotalIncome(),10:N0} €");
+        Console.WriteLine($"  Encours à recouvrer  : {_service.PendingToRecover(),10:N0} €");
+        Console.WriteLine($"  Montant à risque     : {_service.TotalAmountAtRisk(),10:N0} €");
     }
 }
