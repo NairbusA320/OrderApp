@@ -30,6 +30,7 @@ public class Program
                 {
                     case "1": ListAll();               break;
                     case "2": SearchOrder();           break;
+                    case "3": FilterByStatus();        break;
                     case "0":
                     case "q":
                     case "Q":
@@ -65,11 +66,12 @@ public class Program
         Console.WriteLine("|———————————————————————————————————————|");
         Console.WriteLine("│ 1. Lister toutes les commandes        │");
         Console.WriteLine("│ 2. Rechercher une commande            │");
+        Console.WriteLine("│ 3. Filtrer par statut (payé / envoyé) |");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
     }
 
-        // -----------------------------------------------------------------
+    // -----------------------------------------------------------------
     // Actions
     // -----------------------------------------------------------------
 
@@ -121,5 +123,27 @@ public class Program
                 Console.WriteLine("Choix invalide.");
                 break;
         }
+    }
+
+    private static void FilterByStatus()
+    {
+        Console.WriteLine("  1. Payées");
+        Console.WriteLine("  2. Non payées");
+        Console.WriteLine("  3. Envoyées");
+        Console.WriteLine("  4. Non envoyées");
+        Console.Write("Votre choix : ");
+        var choix = Console.ReadLine()?.Trim();
+
+        IEnumerable<Order> resultats = choix switch
+        {
+            "1" => _service.PaidOrders(),
+            "2" => _service.UnpaidOrders(),
+            "3" => _service.SentOrders(),
+            "4" => _service.UnsentOrders(),
+            _   => Enumerable.Empty<Order>()
+        };
+
+        DisplayConsole.DisplayOrdersArray(
+            resultats.OrderBy(c => c.Number), _service);
     }
 }

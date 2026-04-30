@@ -35,6 +35,21 @@ public class OrderService
         _orders.Where(c =>
             c.Enterprise.Contains(name, StringComparison.OrdinalIgnoreCase));
 
+    // -----------------------------------------------------------------
+    // Filtres
+    // -----------------------------------------------------------------
+
+    public IEnumerable<Order> PaidOrders() =>
+        _orders.Where(c => c.Paid);
+
+    public IEnumerable<Order> UnpaidOrders() =>
+        _orders.Where(c => !c.Paid);
+
+    public IEnumerable<Order> SentOrders() =>
+        _orders.Where(c => c.Sent);
+
+    public IEnumerable<Order> UnsentOrders() =>
+        _orders.Where(c => !c.Sent);
 
     // -----------------------------------------------------------------
     // Helpers
