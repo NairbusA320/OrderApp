@@ -33,6 +33,7 @@ public class Program
                     case "3": FilterByStatus();        break;
                     case "4": DisplayDashboard();      break;
                     case "5": DisplayExpeditionList(); break;
+                    case "6": DisplayStats();          break;
                     case "0":
                     case "q":
                     case "Q":
@@ -71,6 +72,7 @@ public class Program
         Console.WriteLine("│ 3. Filtrer par statut (payé / envoyé) |");
         Console.WriteLine("│ 4. Tableau de bord (4 cadrans)        │");
         Console.WriteLine("│ 5. File d'expédition (à envoyer)      │");
+        Console.WriteLine("│ 6. Statistiques financières           │");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
     }
@@ -180,5 +182,22 @@ public class Program
 
         var coutTotal = file.Sum(c => _service.GetExpeditionCost(c));
         Console.WriteLine($"Coût d'expédition prévisionnel : {coutTotal:N0} €");
+    }
+
+    private static void DisplayStats()
+    {
+        DisplayConsole.DisplayTitle("Statistiques financières");
+        Console.WriteLine($"  CA encaissé              : {_service.TotalIncome(),10:N0} €");
+        Console.WriteLine($"  Encours à recouvrer      : {_service.PendingToRecover(),10:N0} €");
+        Console.WriteLine($"  Coût des expéditions     : {_service.PendingExpeditionsCost(),10:N0} €");
+        Console.WriteLine($"  Montant à risque         : {_service.TotalAmountAtRisk(),10:N0} €");
+
+        Console.WriteLine();
+        Console.WriteLine("Répartition par type d'expédition :");
+        Console.WriteLine($"  {"Type",-12} {"Nb cmd",8} {"Coût total",12}");
+        foreach (var (type, nb, cout) in _service.TypeDistribution())
+        {
+            Console.WriteLine($"  {type,-12} {nb,8} {cout,10:N0} €");
+        }
     }
 }

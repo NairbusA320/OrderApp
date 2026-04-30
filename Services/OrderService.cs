@@ -101,4 +101,20 @@ public class OrderService
 
     public decimal TotalAmountAtRisk() =>
         OrdersAtRisk().Sum(c => c.Amount);
+
+    /// <summary>
+    /// Coût total d'expédition pour les commandes restant à envoyer.
+    /// </summary>
+    public decimal PendingExpeditionsCost() =>
+        _orders
+            .Where(c => !c.Sent)
+            .Sum(c => _expeditionValues[GetExpeditionType(c)]);
+
+    public IEnumerable<(ExpeditionType Type, int NumberOrders, decimal TotalCost)> TypeDistribution() =>
+        _orders.GroupBy(GetExpeditionType)
+               .Select(g => (
+                   Type: g.Key,
+                   NumberOrders: g.Count(),
+                   TotalCost: g.Count() * _expeditionValues[g.Key]))
+               .OrderBy(x => PriorityOrder(x.Type));
 }
