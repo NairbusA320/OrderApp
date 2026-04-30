@@ -23,6 +23,18 @@ public class OrderService
     // -----------------------------------------------------------------
 
     public IReadOnlyList<Order> AllOrders() => _orders;
+    
+    public Order? SearchByNumber(int number) =>
+        _orders.FirstOrDefault(c => c.Number == number);
+
+    public IEnumerable<Order> SearchByClient(string name) =>
+        _orders.Where(c =>
+            c.FullName.Contains(name, StringComparison.OrdinalIgnoreCase));
+
+    public IEnumerable<Order> SearchByEnterprise(string name) =>
+        _orders.Where(c =>
+            c.Enterprise.Contains(name, StringComparison.OrdinalIgnoreCase));
+
 
     // -----------------------------------------------------------------
     // Helpers
