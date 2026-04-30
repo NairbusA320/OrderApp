@@ -31,9 +31,10 @@ public class Program
                     case "1": ListAll();               break;
                     case "2": SearchOrder();           break;
                     case "3": FilterByStatus();        break;
-                    case "4": DisplayDashboard();      break;
-                    case "5": DisplayExpeditionList(); break;
-                    case "6": DisplayStats();          break;
+                    case "4": DisplayOrdersAtRisk();   break;
+                    case "5": DisplayDashboard();      break;
+                    case "6": DisplayExpeditionList(); break;
+                    case "7": DisplayStats();          break;
                     case "0":
                     case "q":
                     case "Q":
@@ -70,9 +71,10 @@ public class Program
         Console.WriteLine("│ 1. Lister toutes les commandes        │");
         Console.WriteLine("│ 2. Rechercher une commande            │");
         Console.WriteLine("│ 3. Filtrer par statut (payé / envoyé) |");
-        Console.WriteLine("│ 4. Tableau de bord (4 cadrans)        │");
-        Console.WriteLine("│ 5. File d'expédition (à envoyer)      │");
-        Console.WriteLine("│ 6. Statistiques financières           │");
+        Console.WriteLine("│ 4. Commandes à risque                 │");
+        Console.WriteLine("│ 5. Tableau de bord (4 cadrans)        │");
+        Console.WriteLine("│ 6. File d'expédition (à envoyer)      │");
+        Console.WriteLine("│ 7. Statistiques financières           │");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
     }
@@ -151,6 +153,14 @@ public class Program
 
         DisplayConsole.DisplayOrdersArray(
             resultats.OrderBy(c => c.Number), _service);
+    }
+
+    private static void DisplayOrdersAtRisk()
+    {
+        DisplayConsole.DisplayTitle("Commandes à risque (envoyées sans paiement)");
+        var risque = _service.OrdersAtRisk().OrderByDescending(c => c.Amount);
+        DisplayConsole.DisplayOrdersArray(risque, _service);
+        Console.WriteLine($"Montant total à recouvrer en urgence : {_service.TotalAmountAtRisk():N0} €");
     }
 
     private static void DisplayDashboard()
