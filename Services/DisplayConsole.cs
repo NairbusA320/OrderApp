@@ -27,7 +27,7 @@ public static class DisplayConsole
         }
 
         Console.WriteLine();
-        Console.WriteLine($"{"N°",-5} {"Client",-25} {"Entreprise",-26} {"Montant",10} {"Payé",-6} {"Envoyé",-7} {"Type exp.",-12} {"Statut",-12}");
+        Console.WriteLine($"{"N°",-5} {"Client",-25} {"Entreprise",-26} {"Montant",7} {"Payé",-6} {"Envoyé",-7} {"Type exp.",-12} {"Statut",-12}");
         Console.WriteLine(new string('-', 110));
 
         foreach (var c in list)
@@ -37,7 +37,7 @@ public static class DisplayConsole
                 $"{c.Number,-5} " +
                 $"{Truncate(c.FullName, 25),-25} " +
                 $"{Truncate(c.Enterprise, 26),-26} " +
-                $"{c.Amount,8} € " +
+                $"{c.Amount,6} € " +
                 $"{(c.Paid ? "oui" : "non"),-6} " +
                 $"{(c.Sent ? "oui" : "non"),-7} " +
                 $"{type,-12} " +

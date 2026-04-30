@@ -35,6 +35,7 @@ public class Program
                     case "5": DisplayDashboard();      break;
                     case "6": DisplayExpeditionList(); break;
                     case "7": DisplayStats();          break;
+                    case "8": DisplayTopClients();     break;
                     case "0":
                     case "q":
                     case "Q":
@@ -75,6 +76,7 @@ public class Program
         Console.WriteLine("│ 5. Tableau de bord (4 cadrans)        │");
         Console.WriteLine("│ 6. File d'expédition (à envoyer)      │");
         Console.WriteLine("│ 7. Statistiques financières           │");
+        Console.WriteLine("│ 8. Top clients & entreprises          │");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
     }
@@ -208,6 +210,23 @@ public class Program
         foreach (var (type, nb, cout) in _service.TypeDistribution())
         {
             Console.WriteLine($"  {type,-12} {nb,8} {cout,10:N0} €");
+        }
+    }
+
+    private static void DisplayTopClients()
+    {
+        DisplayConsole.DisplayTitle("Top 5 clients (par montant cumulé)");
+        Console.WriteLine($"  {"Client",-30} {"Nb cmd",8} {"Total",12}");
+        foreach (var (client, nb, total) in _service.TopClients(5))
+        {
+            Console.WriteLine($"  {client,-30} {nb,8} {total,10:N0} €");
+        }
+
+        DisplayConsole.DisplayTitle("Top 5 entreprises (par nombre de commandes)");
+        Console.WriteLine($"  {"Entreprise",-30} {"Nb cmd",8} {"Total",12}");
+        foreach (var (entr, nb, total) in _service.TopEnterprises(5))
+        {
+            Console.WriteLine($"  {entr,-30} {nb,8} {total,10:N0} €");
         }
     }
 }

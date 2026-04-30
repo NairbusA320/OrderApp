@@ -117,4 +117,18 @@ public class OrderService
                    NumberOrders: g.Count(),
                    TotalCost: g.Count() * _expeditionValues[g.Key]))
                .OrderBy(x => PriorityOrder(x.Type));
+
+    public IEnumerable<(string Client, int NumberOrders, decimal Total)> TopClients(int n = 5) =>
+        _orders
+            .GroupBy(c => c.FullName)
+            .Select(g => (Client: g.Key, NumberOrders: g.Count(), Total: g.Sum(c => c.Amount)))
+            .OrderByDescending(x => x.Total)
+            .Take(n);
+
+    public IEnumerable<(string Entreprise, int NumberOrders, decimal Total)> TopEnterprises(int n = 5) =>
+        _orders
+            .GroupBy(c => c.Enterprise)
+            .Select(g => (Entreprise: g.Key, NumberOrders: g.Count(), Total: g.Sum(c => c.Amount)))
+            .OrderByDescending(x => x.NumberOrders)
+            .Take(n);
 }
