@@ -1,0 +1,15 @@
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\bin\Debug\net10.0\OrderApp.exe
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\bin\Debug\net10.0\OrderApp.deps.json
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\bin\Debug\net10.0\OrderApp.runtimeconfig.json
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\bin\Debug\net10.0\OrderApp.dll
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\bin\Debug\net10.0\OrderApp.pdb
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.AssemblyInfoInputs.cache
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.AssemblyInfo.cs
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.csproj.CoreCompileInputs.cache
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.dll
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\refint\OrderApp.dll
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.pdb
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.genruntimeconfig.cache
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\ref\OrderApp.dll
+C:\Hors_Sauvegarde\PERSONNEL\OrderApp\obj\Debug\net10.0\OrderApp.sourcelink.json
