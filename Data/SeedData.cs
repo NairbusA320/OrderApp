@@ -1,0 +1,147 @@
+using OrderApp.Models;
+
+namespace OrderApp.Data;
+
+/// <summary>
+/// Jeu de données.
+/// En conditions réelles, il faudrait gérer un connecteur à la base de données, ou un import csv
+/// </summary>
+public static class SeedData
+{
+    public static List<Order> GetOrders() => new()
+    {
+        new() { Number = 1,   FirstName = "Bertille",   LastName = "Canivet",    Amount = 124, Enterprise = "Neurovia Solutions",       Paid = true,  Sent = false },
+        new() { Number = 2,   FirstName = "Alphonse",   LastName = "Delamarre",  Amount = 796, Enterprise = "Café du Pixel",            Paid = false, Sent = false },
+        new() { Number = 3,   FirstName = "Augustin",   LastName = "Bellamy",    Amount = 372, Enterprise = "Zéphyr & Co.",             Paid = true,  Sent = false },
+        new() { Number = 4,   FirstName = "Hortense",   LastName = "Ménard",     Amount = 364, Enterprise = "Intralux Dynamics",        Paid = false, Sent = false },
+        new() { Number = 5,   FirstName = "Constant",   LastName = "Brivazac",   Amount = 371, Enterprise = "Vertiglass Industries",    Paid = true,  Sent = false },
+        new() { Number = 6,   FirstName = "Séraphin",   LastName = "Lemoigne",   Amount = 54,  Enterprise = "Nova Lune Créations",      Paid = false, Sent = true  },
+        new() { Number = 7,   FirstName = "Zélie",      LastName = "Fournet",    Amount = 468, Enterprise = "HexaCore Labs",            Paid = true,  Sent = true  },
+        new() { Number = 8,   FirstName = "Léocadie",   LastName = "Prévost",    Amount = 639, Enterprise = "Miel Urbain SARL",         Paid = false, Sent = true  },
+        new() { Number = 9,   FirstName = "Léontine",   LastName = "Drouin",     Amount = 649, Enterprise = "Orbitek Conseil",          Paid = true,  Sent = true  },
+        new() { Number = 10,  FirstName = "Théodore",   LastName = "Bressieux",  Amount = 484, Enterprise = "Floréa Botanique",         Paid = false, Sent = false },
+        new() { Number = 11,  FirstName = "Hortense",   LastName = "Ménard",     Amount = 125, Enterprise = "Grain de Code",            Paid = false, Sent = true  },
+        new() { Number = 12,  FirstName = "Eulalie",    LastName = "Mignot",     Amount = 250, Enterprise = "Blumix Media",             Paid = false, Sent = false },
+        new() { Number = 13,  FirstName = "Émile",      LastName = "Chavigny",   Amount = 162, Enterprise = "Koralys Systems",          Paid = true,  Sent = true  },
+        new() { Number = 14,  FirstName = "Éloi",       LastName = "Montbard",   Amount = 781, Enterprise = "Veloce Finance",           Paid = true,  Sent = true  },
+        new() { Number = 17,  FirstName = "Mélisande",  LastName = "Brochant",   Amount = 372, Enterprise = "Atelier Nimbus",           Paid = true,  Sent = true  },
+        new() { Number = 18,  FirstName = "Florent",    LastName = "Delarive",   Amount = 287, Enterprise = "EchoVerde Énergie",        Paid = false, Sent = true  },
+        new() { Number = 19,  FirstName = "Honorine",   LastName = "Duchesne",   Amount = 480, Enterprise = "Synthara Technologies",    Paid = true,  Sent = true  },
+        new() { Number = 150, FirstName = "Léocadie",   LastName = "Prévost",    Amount = 460, Enterprise = "Papyrus Digital",          Paid = true,  Sent = false },
+        new() { Number = 20,  FirstName = "Célestine",  LastName = "Varennes",   Amount = 433, Enterprise = "Brume et Bois",            Paid = false, Sent = false },
+        new() { Number = 21,  FirstName = "Sidonie",    LastName = "Bréguet",    Amount = 575, Enterprise = "Luxevault Capital",        Paid = false, Sent = false },
+        new() { Number = 22,  FirstName = "Anatole",    LastName = "Vimeux",     Amount = 101, Enterprise = "AquaTerra Foods",          Paid = true,  Sent = true  },
+        new() { Number = 23,  FirstName = "Firmin",     LastName = "Roselier",   Amount = 439, Enterprise = "Osmose Motion",            Paid = true,  Sent = true  },
+        new() { Number = 24,  FirstName = "Léocadie",   LastName = "Prévost",    Amount = 170, Enterprise = "Fractal Voyages",          Paid = true,  Sent = true  },
+        new() { Number = 26,  FirstName = "Sidonie",    LastName = "Bréguet",    Amount = 588, Enterprise = "Hélium Design",            Paid = true,  Sent = false },
+        new() { Number = 16,  FirstName = "Arsène",     LastName = "Corbin",     Amount = 93,  Enterprise = "Réseau Nimbus",            Paid = true,  Sent = false },
+        new() { Number = 27,  FirstName = "Isidore",    LastName = "Frémont",    Amount = 215, Enterprise = "Solstice Biotech",         Paid = false, Sent = false },
+        new() { Number = 28,  FirstName = "Léocadie",   LastName = "Prévost",    Amount = 357, Enterprise = "Pavoa Concept",            Paid = false, Sent = true  },
+        new() { Number = 41,  FirstName = "Léontine",   LastName = "Drouin",     Amount = 661, Enterprise = "Borealis Éditions",        Paid = true,  Sent = false },
+        new() { Number = 29,  FirstName = "Philomène",  LastName = "Daubigny",   Amount = 706, Enterprise = "Fixionix Solutions",       Paid = false, Sent = false },
+        new() { Number = 36,  FirstName = "Octave",     LastName = "Lamoureux",  Amount = 545, Enterprise = "Atome Bleu Consulting",    Paid = false, Sent = false },
+        new() { Number = 62,  FirstName = "Clémence",   LastName = "Raguin",     Amount = 69,  Enterprise = "Brio&Brume Architecture",  Paid = false, Sent = false },
+        new() { Number = 49,  FirstName = "Apolline",   LastName = "Maréchal",   Amount = 579, Enterprise = "Lunaris Couture",          Paid = true,  Sent = true  },
+        new() { Number = 34,  FirstName = "Léandre",    LastName = "Vallin",     Amount = 601, Enterprise = "Quantive Analytics",       Paid = false, Sent = true  },
+        new() { Number = 37,  FirstName = "Eugénie",    LastName = "Travers",    Amount = 452, Enterprise = "Nomadia Transport",        Paid = true,  Sent = true  },
+        new() { Number = 38,  FirstName = "Ernestine",  LastName = "Valcourt",   Amount = 52,  Enterprise = "Sable Noir Studios",       Paid = false, Sent = true  },
+        new() { Number = 40,  FirstName = "Gaspard",    LastName = "Louvet",     Amount = 765, Enterprise = "Zenitra Health",           Paid = false, Sent = true  },
+        new() { Number = 148, FirstName = "Léa",        LastName = "Girard",     Amount = 398, Enterprise = "Aurum Partners",           Paid = false, Sent = false },
+        new() { Number = 136, FirstName = "Hugo",       LastName = "Lefèvre",    Amount = 259, Enterprise = "Cyclora Technologies",     Paid = true,  Sent = false },
+        new() { Number = 203, FirstName = "Camille",    LastName = "Dupont",     Amount = 476, Enterprise = "Velours Urbain",           Paid = false, Sent = false },
+        new() { Number = 138, FirstName = "Maxime",     LastName = "Moreau",     Amount = 150, Enterprise = "Alkymia Ventures",         Paid = false, Sent = false },
+        new() { Number = 113, FirstName = "Chloé",      LastName = "Marchand",   Amount = 145, Enterprise = "Lunaris Couture",          Paid = false, Sent = false },
+        new() { Number = 115, FirstName = "Julien",     LastName = "Lemoine",    Amount = 365, Enterprise = "Orkadia Digital",          Paid = false, Sent = true  },
+        new() { Number = 121, FirstName = "Emma",       LastName = "Robert",     Amount = 387, Enterprise = "Cryptex Compta",           Paid = true,  Sent = false },
+        new() { Number = 125, FirstName = "Nathan",     LastName = "Gauthier",   Amount = 557, Enterprise = "VitaNova Pharma",          Paid = true,  Sent = true  },
+        new() { Number = 120, FirstName = "Manon",      LastName = "Perrot",     Amount = 201, Enterprise = "Modulink Systèmes",        Paid = true,  Sent = true  },
+        new() { Number = 72,  FirstName = "Lucas",      LastName = "Chevalier",  Amount = 683, Enterprise = "Éclat Urbain SARL",        Paid = true,  Sent = true  },
+        new() { Number = 67,  FirstName = "Clara",      LastName = "Millet",     Amount = 677, Enterprise = "Tyméo Robotics",           Paid = false, Sent = true  },
+        new() { Number = 108, FirstName = "Théo",       LastName = "Fabre",      Amount = 241, Enterprise = "Graphéal Studio",          Paid = false, Sent = true  },
+        new() { Number = 140, FirstName = "Zoé",        LastName = "Pires",      Amount = 430, Enterprise = "NoctiData",                Paid = false, Sent = false },
+        new() { Number = 52,  FirstName = "Enzo",       LastName = "Dumas",      Amount = 414, Enterprise = "Terranova Logistique",     Paid = true,  Sent = false },
+        new() { Number = 130, FirstName = "Jade",       LastName = "Blanchard",  Amount = 365, Enterprise = "Lunaris Couture",          Paid = false, Sent = false },
+        new() { Number = 149, FirstName = "Mathis",     LastName = "Caron",      Amount = 205, Enterprise = "Modulink Systèmes",        Paid = true,  Sent = true  },
+        new() { Number = 103, FirstName = "Louise",     LastName = "Fontaine",   Amount = 98,  Enterprise = "Lunaris Couture",          Paid = true,  Sent = true  },
+        new() { Number = 60,  FirstName = "Tom",        LastName = "Laporte",    Amount = 563, Enterprise = "Lunaris Couture",          Paid = true,  Sent = true  },
+        new() { Number = 76,  FirstName = "Sarah",      LastName = "Pelletier",  Amount = 148, Enterprise = "Papyrus Digital",          Paid = true,  Sent = true  },
+        new() { Number = 117, FirstName = "Ethan",      LastName = "Delorme",    Amount = 766, Enterprise = "Brume et Bois",            Paid = true,  Sent = true  },
+        new() { Number = 83,  FirstName = "Pauline",    LastName = "Martel",     Amount = 81,  Enterprise = "Luxevault Capital",        Paid = true,  Sent = true  },
+        new() { Number = 114, FirstName = "Noah",       LastName = "Renard",     Amount = 682, Enterprise = "AquaTerra Foods",          Paid = false, Sent = false },
+        new() { Number = 109, FirstName = "Élise",      LastName = "Garnier",    Amount = 471, Enterprise = "Papyrus Digital",          Paid = false, Sent = false },
+        new() { Number = 123, FirstName = "Baptiste",   LastName = "Lemaitre",   Amount = 364, Enterprise = "Papyrus Digital",          Paid = true,  Sent = true  },
+        new() { Number = 84,  FirstName = "Anaïs",      LastName = "Leclerc",    Amount = 259, Enterprise = "Papyrus Digital",          Paid = true,  Sent = false },
+        new() { Number = 64,  FirstName = "Léo",        LastName = "Roux",       Amount = 440, Enterprise = "Vertiglass Industries",    Paid = false, Sent = true  },
+        new() { Number = 126, FirstName = "Margaux",    LastName = "Hoarau",     Amount = 640, Enterprise = "Nova Lune Créations",      Paid = false, Sent = true  },
+        new() { Number = 122, FirstName = "Victor",     LastName = "Michaud",    Amount = 284, Enterprise = "HexaCore Labs",            Paid = true,  Sent = true  },
+        new() { Number = 70,  FirstName = "Alice",      LastName = "Menard",     Amount = 590, Enterprise = "Miel Urbain SARL",         Paid = true,  Sent = true  },
+        new() { Number = 80,  FirstName = "Adrien",     LastName = "Bourdon",    Amount = 268, Enterprise = "Orbitek Conseil",          Paid = false, Sent = true  },
+    };
+
+    /// <summary>
+    /// Mapping Entreprise -> Type d'expédition.
+    /// </summary>
+    public static Dictionary<string, ExpeditionType> GetTypesByEnterprise() => new()
+    {
+        ["Neurovia Solutions"]       = ExpeditionType.Urgent,
+        ["Café du Pixel"]            = ExpeditionType.Prioritaire,
+        ["Zéphyr & Co."]             = ExpeditionType.Lent,
+        ["Intralux Dynamics"]        = ExpeditionType.Urgent,
+        ["Vertiglass Industries"]    = ExpeditionType.Normal,
+        ["Nova Lune Créations"]      = ExpeditionType.Urgent,
+        ["HexaCore Labs"]            = ExpeditionType.Lent,
+        ["Miel Urbain SARL"]         = ExpeditionType.Urgent,
+        ["Orbitek Conseil"]          = ExpeditionType.Urgent,
+        ["Floréa Botanique"]         = ExpeditionType.Prioritaire,
+        ["Grain de Code"]            = ExpeditionType.Prioritaire,
+        ["Blumix Media"]             = ExpeditionType.Lent,
+        ["Koralys Systems"]          = ExpeditionType.Lent,
+        ["Veloce Finance"]           = ExpeditionType.Normal,
+        ["Atelier Nimbus"]           = ExpeditionType.Prioritaire,
+        ["EchoVerde Énergie"]        = ExpeditionType.Lent,
+        ["Synthara Technologies"]    = ExpeditionType.Normal,
+        ["Papyrus Digital"]          = ExpeditionType.Normal,
+        ["Brume et Bois"]            = ExpeditionType.Prioritaire,
+        ["Luxevault Capital"]        = ExpeditionType.Normal,
+        ["AquaTerra Foods"]          = ExpeditionType.Prioritaire,
+        ["Osmose Motion"]            = ExpeditionType.Normal,
+        ["Fractal Voyages"]          = ExpeditionType.Normal,
+        ["Hélium Design"]            = ExpeditionType.Lent,
+        ["Réseau Nimbus"]            = ExpeditionType.Urgent,
+        ["Solstice Biotech"]         = ExpeditionType.Prioritaire,
+        ["Pavoa Concept"]            = ExpeditionType.Prioritaire,
+        ["Borealis Éditions"]        = ExpeditionType.Lent,
+        ["Fixionix Solutions"]       = ExpeditionType.Normal,
+        ["Atome Bleu Consulting"]    = ExpeditionType.Urgent,
+        ["Brio&Brume Architecture"]  = ExpeditionType.Prioritaire,
+        ["Lunaris Couture"]          = ExpeditionType.Urgent,
+        ["Quantive Analytics"]       = ExpeditionType.Urgent,
+        ["Nomadia Transport"]        = ExpeditionType.Urgent,
+        ["Sable Noir Studios"]       = ExpeditionType.Normal,
+        ["Zenitra Health"]           = ExpeditionType.Normal,
+        ["Aurum Partners"]           = ExpeditionType.Urgent,
+        ["Cyclora Technologies"]     = ExpeditionType.Prioritaire,
+        ["Velours Urbain"]           = ExpeditionType.Prioritaire,
+        ["Alkymia Ventures"]         = ExpeditionType.Prioritaire,
+        ["Orkadia Digital"]          = ExpeditionType.Lent,
+        ["Cryptex Compta"]           = ExpeditionType.Urgent,
+        ["VitaNova Pharma"]          = ExpeditionType.Normal,
+        ["Modulink Systèmes"]        = ExpeditionType.Lent,
+        ["Éclat Urbain SARL"]        = ExpeditionType.Prioritaire,
+        ["Tyméo Robotics"]           = ExpeditionType.Lent,
+        ["Graphéal Studio"]          = ExpeditionType.Normal,
+        ["NoctiData"]                = ExpeditionType.Urgent,
+        ["Terranova Logistique"]     = ExpeditionType.Lent,
+    };
+
+    /// <summary>
+    /// Coût d'expédition par type.
+    /// </summary>
+    public static Dictionary<ExpeditionType, decimal> GetExpeditionValues() => new()
+    {
+        [ExpeditionType.Urgent]      = 100,
+        [ExpeditionType.Prioritaire] = 80,
+        [ExpeditionType.Normal]      = 50,
+        [ExpeditionType.Lent]        = 20,
+    };
+}
