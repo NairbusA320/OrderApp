@@ -32,6 +32,7 @@ public class Program
                     case "2": SearchOrder();           break;
                     case "3": FilterByStatus();        break;
                     case "4": DisplayDashboard();      break;
+                    case "5": DisplayExpeditionList(); break;
                     case "0":
                     case "q":
                     case "Q":
@@ -69,6 +70,7 @@ public class Program
         Console.WriteLine("│ 2. Rechercher une commande            │");
         Console.WriteLine("│ 3. Filtrer par statut (payé / envoyé) |");
         Console.WriteLine("│ 4. Tableau de bord (4 cadrans)        │");
+        Console.WriteLine("│ 5. File d'expédition (à envoyer)      │");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
     }
@@ -168,5 +170,15 @@ public class Program
         Console.WriteLine($"  CA encaissé          : {_service.TotalIncome(),10:N0} €");
         Console.WriteLine($"  Encours à recouvrer  : {_service.PendingToRecover(),10:N0} €");
         Console.WriteLine($"  Montant à risque     : {_service.TotalAmountAtRisk(),10:N0} €");
+    }
+
+    private static void DisplayExpeditionList()
+    {
+        DisplayConsole.DisplayTitle("File d'expédition (payées, non envoyées, par priorité)");
+        var file = _service.ExpeditionLineByPriority();
+        DisplayConsole.DisplayOrdersArray(file, _service);
+
+        var coutTotal = file.Sum(c => _service.GetExpeditionCost(c));
+        Console.WriteLine($"Coût d'expédition prévisionnel : {coutTotal:N0} €");
     }
 }

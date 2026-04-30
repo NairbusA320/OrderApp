@@ -57,6 +57,14 @@ public class OrderService
     public IEnumerable<Order> OrdersAtRisk() =>
         _orders.Where(c => c.Sent && !c.Paid);
 
+    /// <summary>
+    /// File d'expédition : commandes payées mais pas encore envoyées, triées par priorité d'expédition décroissante.
+    /// </summary>
+    public IEnumerable<Order> ExpeditionLineByPriority() =>
+        _orders
+            .Where(c => c.Paid && !c.Sent)
+            .OrderBy(c => PriorityOrder(GetExpeditionType(c)));
+
     // -----------------------------------------------------------------
     // Helpers
     // -----------------------------------------------------------------
@@ -68,6 +76,18 @@ public class OrderService
                 $"Aucun type d'expédition défini pour l'entreprise '{c.Enterprise}'.");
         return type;
     }
+
+    private static int PriorityOrder(ExpeditionType t) => t switch
+    {
+        ExpeditionType.Urgent      => 0,
+        ExpeditionType.Prioritaire => 1,
+        ExpeditionType.Normal      => 2,
+        ExpeditionType.Lent        => 3,
+        _ => 99
+    };
+
+    public decimal GetExpeditionCost(Order c) =>
+        _expeditionValues[GetExpeditionType(c)];
 
     // -----------------------------------------------------------------
     // Statistiques
