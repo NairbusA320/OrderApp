@@ -17,4 +17,23 @@ public class OrderService
         _typesByEnterprise = typesByEnterprise;
         _expeditionValues = expeditionValues;
     }
+        
+    // -----------------------------------------------------------------
+    // Lecture / recherche
+    // -----------------------------------------------------------------
+
+    public IReadOnlyList<Order> AllOrders() => _orders;
+
+    // -----------------------------------------------------------------
+    // Helpers
+    // -----------------------------------------------------------------
+
+    public ExpeditionType GetExpeditionType(Order c)
+    {
+        if (!_typesByEnterprise.TryGetValue(c.Enterprise, out var type))
+            throw new InvalidOperationException(
+                $"Aucun type d'expédition défini pour l'entreprise '{c.Enterprise}'.");
+        return type;
+    }
+
 }

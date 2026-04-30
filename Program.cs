@@ -28,6 +28,7 @@ public class Program
             {
                 switch (choix)
                 {
+                    case "1": ListerToutes();               break;
                     case "0":
                     case "q":
                     case "Q":
@@ -61,7 +62,19 @@ public class Program
     {
         Console.WriteLine("│     GESTION DES COMMANDES — MENU      │");
         Console.WriteLine("|———————————————————————————————————————|");
+        Console.WriteLine("│ 1. Lister toutes les commandes        │");
         Console.WriteLine("│ 0. Quitter                            │");
         Console.Write("Votre choix : ");
+    }
+
+        // -----------------------------------------------------------------
+    // Actions
+    // -----------------------------------------------------------------
+
+    private static void ListerToutes()
+    {
+        DisplayConsole.DisplayTitle("Toutes les commandes (triées par numéro)");
+        var commandes = _service.AllOrders().OrderBy(c => c.Number);
+        DisplayConsole.DisplayOrdersArray(commandes, _service);
     }
 }
