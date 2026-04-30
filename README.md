@@ -1,4 +1,4 @@
-Application console de gestion de commandes
+Application console de gestion de commandes. Exe dans bin/Debug/net10.0
 
 Les données sont actuellement inscrites en dur dans le code, mais il est parfaitement envisageable de changer la manière de les récupérer (via un fichier CSV ou BDD)
 Les données se découpent en 3 parties : 
